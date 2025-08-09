@@ -1,14 +1,16 @@
 {
   "name": "Quantasport GPT-OSS Audit Stack",
   "version": "0.1.0",
-  "description": "Local/offline-capable Quantasport stack with FastAPI backend, Streamlit dashboard, and optional blockchain anchoring.",
+  "description": "Local/offline-capable Quantasport stack with FastAPI backend, Streamlit dashboard, append-only hash chain, and optional blockchain anchoring (OpenTimestamps, Chainpoint).",
   "author": "Dayok / Quantasport",
   "license": "MIT",
   "main": "index.js",
   "scripts": {
     "start": "docker compose up --build",
     "stop": "docker compose down",
-    "audit:verify": "python scripts/verify_chain.py"
+    "audit:verify": "python scripts/verify_chain.py",
+    "anchor:ots": "python scripts/submit_ots.py",
+    "anchor:chainpoint": "python scripts/submit_chainpoint.py"
   },
   "dependencies": {
     "fastapi": ">=0.110.0",
@@ -16,11 +18,22 @@
     "pydantic": ">=2.6.1",
     "streamlit": ">=1.32.0",
     "requests": ">=2.31.0",
-    "pandas": ">=2.2.1"
+    "pandas": ">=2.2.1",
+    "watchdog": ">=4.0.0",
+    "python-dateutil": ">=2.9.0",
+    "pyopenssl": ">=24.0.0"
+  },
+  "optionalDependencies": {
+    "opentimestamps-client": ">=0.7.0",
+    "chainpoint-client": ">=1.0.0"
   },
   "config": {
     "enableAnchor": false,
-    "anchorIntervalSeconds": 0
+    "anchorIntervalSeconds": 0,
+    "anchorProviders": [
+      "OpenTimestamps",
+      "Chainpoint"
+    ],
+    "auditDataDir": "./shared/audit-data"
   }
 }
-
