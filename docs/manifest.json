@@ -1,0 +1,8 @@
+{
+  "channel": "stable",
+  "server": "https://YOUR_USERNAME.github.io/quantasport-updates",
+  "generatedUtc": "2025-01-01T00:00:00Z",
+  "artifacts": [],
+  "checksums": "SHA256SUMS.txt",
+  "format": "quantasport.manifest.v1"
+}
